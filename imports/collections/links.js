@@ -6,7 +6,7 @@ import { check, Match } from 'meteor/check';
 
 Meteor.methods({
     'links.insert':function(url){
-        // validUrl.isUri(url); true: return url, false: return undefine
+        // validUrl.isUri(url); true: return url, false: return undefined
         // check(value, pattern)
         /* Match.Where(condition): 
         如果condition為true，check不做任何事
