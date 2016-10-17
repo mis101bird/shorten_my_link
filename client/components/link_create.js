@@ -10,12 +10,12 @@ class LinkCreate extends Component{
         event.preventDefault(); //阻止元素默認行為
         console.log(this.refs.link.value); //ref: react的特殊屬性，取得render return的HTML DOM實體
         Meteor.call('links.insert',this.refs.link.value, (error)=>{ //add callback
-            console.log(error); //回傳的是給Client的簡易版Error
+            // console.log(error); 回傳的是給Client的簡易版Error
             if(error){
                 this.setState({ error: 'Please enter the valid URL'});
             }else{
                 this.setState({ error: '' }); // 改回no Error
-                this.refs.link.value=""; //清空inputs
+                this.refs.link.value=''; //清空inputs
             }
         }); // 用call使用Meteor.method
     }
