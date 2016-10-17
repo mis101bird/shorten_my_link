@@ -17,11 +17,15 @@ function onRoute(req, res, next/*call next middleware to handle*/){
 
   if(link){
     // do redirect
+
+    // Already on server, 不用使用Meteor.methods
+    // 當client side發送操作資料庫的命令時，才需使用Meteor.methods
+    Links.update(link, { $inc: { clicks: 1 }}); //click增加1
     res.writeHead(307, { "Location": link.url }); //307 redirect request
     res.end();
   }else{
     // Not found the link
-    next(); // Let someone else handle it 
+    next(); // pass control to the next handler
   }
 }
 // http://localhost:3000    No match!
@@ -30,4 +34,4 @@ const middleware = ConnectRoute(function(router){
    router.get("/:token", onRoute);
 });
 
-WebApp.connectHandlers.use(middleware);
+WebApp.connectHandlers.use(middleware); //use the middleware
